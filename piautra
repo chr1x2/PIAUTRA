@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # Author: Christian Foronda
 # Description: Check github for updated files. If any, pull to update local repo of prod server.
 # Updated: May 4 2011
@@ -16,7 +16,7 @@ remote="github"
 branch="master"
 
 
-##### DO NOT EDIT BEYOND THIS LINE ########
+######## DO NOT EDIT BELOW THIS LINE ########
 
 # Fetch update from github
 update=$($git remote update)
