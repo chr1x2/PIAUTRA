@@ -1,1 +1,40 @@
-asdfasdfasdfasdfasdfasdfasdfasdf
+#!/bin/bash -x
+# Author: Christian Foronda
+# Description: Check github for updated files. If any, pull to update local repo of prod server.
+# Updated: May 4 2011
+
+# Path of git
+git=/usr/bin/git
+
+# Change this to your local repo dir
+dir=/home/cf/Projects/PIAUTRA
+
+# Change it to your remote repo name
+remote="github"
+
+# Change it to your local branch name
+branch="master"
+
+
+##### DO NOT EDIT BEYOND THIS LINE ########
+
+# Fetch update from github
+update=$($git remote update)
+
+# Get the updated head on github
+remoteref=$($git ls-remote $remote -h master | awk '{ print $1  }')
+
+# Get the latest head on local branch
+branchref=$($git rev-list --max-count=1 $branch)
+
+if [ $remoteref != $branchref ]; then
+   # if head doesn't match, initiate pull to deploy on prod
+   unset GIT_DIR
+   cd $dir
+   git pull
+   # then restart apache
+   echo "Should restart apache but it won't until you're root. You may want to permit on sudo?"
+   else
+   # exit if nothing to do
+   exit
+fi
