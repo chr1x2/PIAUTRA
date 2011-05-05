@@ -32,8 +32,6 @@ if [ $remoteref != $branchref ]; then
    unset GIT_DIR
    cd $dir
    git pull
-   # then restart apache
-   echo "Should restart apache but it won't until you're root. You may want to permit on sudo?"
    else
    # exit if nothing to do
    exit
